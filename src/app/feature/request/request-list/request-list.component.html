@@ -1,0 +1,41 @@
+<app-menu></app-menu> 
+<span class="page-title font-weight-bold font-italic">{{title}}</span>
+<span><a routerLink="/request/create" *ngIf="isAdmin">
+  <img width="20" height="20" src="assets/add-icon.png" title="add new"></a></span>
+<table class="table table-sm table-striped">
+    <thead>
+        <tr>
+            <!-- <td>Id</td> -->
+            <td>User</td>
+            <td>Description</td>
+            <td>Status</td>
+            <td>Total</td>
+            <td>Action</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor= 'let request of requests'>
+            <!-- <td>{{request.id}}</td> -->
+            <td>{{request.user.userName}}</td>
+            <td>{{request.description}}</td>
+            <td>{{request.status}}</td>
+            <td>{{request.total | currency}}</td>
+            <td>
+              <a routerLink="/request/detail/{{request.id}}">
+                  <img width="20" height="20" src="assets/details.png" title="Detail">
+              </a>
+              <span *ngIf="loggedInUser.admin || loggedInUser == request.user"> |
+                <a routerLink="/request/edit/{{request.id}}">
+                    <img width="20" height="20" src="assets/pencil-icon.png" title="Edit">
+                </a>
+              </span>
+              <span *ngIf="loggedInUser.id == request.user.id && request.status == 'New'">
+                |
+                <a routerLink="request/detail/{{request.id}}">
+                  <img width="20" height="20" src="assets/lines.png" title="Add Line Items">
+                </a>
+              </span>
+          </td>
+        </tr>
+    </tbody>
+</table>

@@ -1,0 +1,31 @@
+<app-menu></app-menu>
+<span class="page-title font-weight-bold font-italic">{{title}}</span>
+| <a routerLink="/request/list">Return to list...</a>
+<div *ngIf="!isReviewer">This is for a Reviewer, Loading...</div>
+<div *ngIf="isReviewer">
+    <div *ngIf="!requests">Loading please wait...</div>
+    <div *ngIf="requests">
+        <table class="table table-sm">
+            <thead>
+                <tr>
+                    <th>User</th>
+                    <th>Description</th>
+                    <th>Justification</th>
+                    <th>Total</th>
+                    <th>Reviewer</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let request of requests">
+                    <td>{{request.user.username}}</td>
+                    <td>{{request.description}}</td>
+                    <td>{{request.justification}}</td>
+                    <td>{{request.total | currency}}</td>
+                    <td><a routerLink="/request/approve/{{request.id}}">
+                        <img src="assets/review.png" width="20" height="20">
+                    </a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

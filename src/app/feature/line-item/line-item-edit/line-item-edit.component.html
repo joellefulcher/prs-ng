@@ -1,0 +1,32 @@
+<app-menu></app-menu> 
+<span class="page-title font-weight-bold font-italic">{{title}}</span>
+<span>  | <a routerLink="/request/list">Return to list...</a></span>
+<div *ngIf="!loggedInUser">Please login to continue...</div>
+<div *ngIf="loggedInUser">
+    <div *ngIf="!lineItem">Loading...</div>
+    <div *ngIf="lineItem">
+        <table class="table table-sm">
+            <tr>
+                <th>Product</th>
+                <td>{{lineItem.product.name}}</td>
+            </tr>
+            <tr>
+                <th>Product Code</th>
+                 <td>{{lineItem.product.partNumber}}</td>
+            </tr>
+            <tr>
+                <th>Quantity</th>
+                <td>
+                    <input [(ngModel)]="lineItem.quantity" type="number">
+                </td>
+            </tr>
+            <tr>
+                <th>Sub-Total</th>
+                <td>{{lineItem.quantity*lineItem.product.price | currency}}</td>
+            </tr>
+        </table>
+        <span>
+            <button class="btn btn-primary" (click)="save()">Save</button>        
+            </span>
+    </div>
+</div>

@@ -1,0 +1,53 @@
+<app-menu></app-menu>
+<span class="page-title font-weight-bold font-italic">{{title}}</span>
+    <a routerLink="/request/list">Return to list.....</a>
+<div *ngIf="!loggedInUser">Login is required</div>
+<div *ngIf="loggedInUser">
+    <table class="table table-sm">
+        <tr>
+            <th>
+                User
+            </th>
+            <td>{{request.user.userName}}</td>
+        </tr>
+        <tr>
+            <th>
+                Description
+            </th>
+            <td>
+                <input [(ngModel)]="request.description" type="text">
+            </td>
+        </tr>
+        <tr>
+            <th>
+                Justification
+            </th>
+            <td>
+                <input [(ngModel)]="request.justification" type="text">
+            </td>
+        </tr>
+        <tr>
+            <th>
+                Date Needed
+            </th>
+            <td>
+                <input [(ngModel)]="request.dateNeeded" type="date">
+            </td>
+        </tr>
+        <tr>
+            <th>
+                Delivery Method
+            </th>
+            <td>
+                <select [(ngModel)]="request.deliveryMode">
+                    <option>Ground</option>
+                    <option>Two-Day</option>
+                    <option>Overnight</option>
+                </select>
+            </td>
+        </tr>
+    </table>
+    <div>
+        <span><button class="btn btn-primary" (click)="save()">Create</button></span>
+    </div>
+</div>

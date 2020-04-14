@@ -1,0 +1,78 @@
+<app-menu></app-menu>
+<span class="page-title font-weight-bold font-italic">{{title}}</span>
+<span>  | <a routerLink="/request/list">Return to list...</a></span>
+<div *ngIf="!loggedInUser">To continue, login is required...</div>
+<div *ngIf="loggedInUser">
+    <div *ngIf="!request">Loading...</div>
+        <div *ngIf="request">
+          <table class="table table-sm">
+            <tr>
+                <th>
+                    Delivery Type
+                </th>
+                <td>
+                    {{request.deliveryMode}}
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    User
+                </th>
+                <td>
+                    {{request.user.userName}}
+                </td>
+                <th>
+                    Current Status
+                </th>
+                <td>
+                    {{request.status}}
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Description
+                </th>
+                <td>
+                    {{request.description}}
+                </td>
+                <th>
+                    Current Total
+                </th>
+                <td>
+                    {{request.total | currency}}
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Justification
+                </th>
+                <td>
+                    {{request.justification}}
+                </td>
+                <th>
+                    Date Needed
+                </th>
+                <td>
+                    {{request.dateNeeded | date: fullDate}}
+                </td>
+            </tr>
+            <tr *ngIf="request.status == 'REJECTED'">
+                <th>
+                    Reason for Rejection
+                </th>
+                <td>
+                    {{request.reasonForRejection}}
+                </td>
+            </tr>
+            <app-request-lines></app-request-lines>
+        <div>
+            <button class="btn btn-danger btm-sm" 
+            *ngIf="loggedInUser.id == request.user.id" (click)="delete()">Delete Request</button>
+
+            <span *ngIf="request.status == 'New' && loggedInUser.id == request.user.id"> |
+                <button class="btn btn-primary btn-sm" (click)="submit()">Submit Request</button>
+            </span>
+           
+        </div>
+        
+        </table>

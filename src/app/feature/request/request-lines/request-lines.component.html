@@ -1,0 +1,35 @@
+<!-- <app-menu></app-menu>  -->
+<span class="page-title font-weight-bold font-italic">{{title}}</span>
+<span *ngIf="request">
+    <a routerLink="/request/lineitems/{{id}}" *ngIf="loggedInUser.id == request.user.id">
+        <img src="assets/add-icon.png" width="20" height="20">
+    </a>
+</span>
+<div *ngIf="!lineItems">Loading...</div>
+<div *ngIf="lineItems">
+<table class="table table-sm table-striped">
+    <thead>
+        <th>Product</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Sub-Total</th>
+        <th>Actions</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let lineItem of lineItems">
+            <td>{{lineItem.product.name}}</td>
+            <td>{{lineItem.product.price}}</td>
+            <td>{{lineItem.quantity}}</td>
+            <td>{{lineItem.quantity*lineItem.product.price | currency}}</td>
+            <td>
+                <a routerLink="/line-item/line-item-edit/line-item-edit{{lineItem.id}}" *ngIf="loggedInUser.id == lineItem.request.user.id">
+                    <img src="assets/pencil-icon.png" width="20" height="20">
+                </a> | 
+                <a *ngIf="loggedInUser.id == lineItem.request.user.id" (click)="deleteLineItem(lineItem.id)"> 
+                    <img src="assets/delete.jpg" width="20" height="20">
+                </a>
+        </tr>
+    </tbody>
+</table>
+</div>
+

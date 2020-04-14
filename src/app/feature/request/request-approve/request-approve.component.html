@@ -1,0 +1,41 @@
+<app-menu></app-menu>
+<span class="page-title font-weight-bold font-italic">{{title}}</span>
+<div *ngIf="!isReviewer">Must be a reviewer!</div>
+<div *ngIf="isReviewer">
+    <div *ngIf="!request">Loading...</div>
+    <table *ngIf="request" class="table table-sm">
+        <tr>
+            <th>Description</th>
+            <td>{{request.description}}</td>
+        </tr>
+        <tr>
+            <th>Justification</th>
+            <td>{{request.justification}}</td>
+        </tr>
+        <tr>
+            <th>Date Submitted</th>
+            <td>{{request.submittedDate}}</td>
+        </tr>
+        <tr>
+            <th>Date Needed</th>
+            <td>{{request.dateNeeded}}</td>
+        </tr>
+        <tr>
+            <th>Delivery Type</th>
+            <td>{{request.deliveryMode}}</td>
+        </tr>
+        <tr>
+            <th>Total</th>
+            <td>{{request.total | currency}}</td>
+        </tr>
+    </table>
+    <app-request-lines></app-request-lines>
+    <div *ngIf="rejectBool">
+        <textarea [(ngModel)]="request.reasonForRejection" type="text" maxlength="50" 
+        placeholder="Reason For Rejection (Max: 150  characters)"></textarea>     
+    </div>
+    <div>
+        <button class="btn btn-success" (click)="approve()">Approved</button>
+        <button class="btn btn-danger" (click)="checkReject()">Rejected</button>
+    </div>
+</div>

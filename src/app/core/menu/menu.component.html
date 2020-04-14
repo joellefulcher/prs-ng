@@ -1,0 +1,15 @@
+<nav>
+    <ul>
+        <li *ngFor="let mi of menuItems" title = "{{mi.tooltip}}">
+           <!-- <a *ngIf='loggedInUser' class="nav-link" routerLink="{{mi.href}}">{{mi.display}}</a> -->
+           <a class="nav-link" routerLink="{{mi.href}}">{{mi.display}}</a>
+           <!-- <a *ngIf='!loggedInUser' class="nav-link disabled">{{mi.display}}</a> -->
+        </li>
+        <li>
+            <a *ngIf="loggedInUser && isReviewer" class="nav-link" routerLink="/request/review">Review</a>
+        </li>
+        <li>
+            <a *ngIf="!loggedInUser" class="nav-link" routerLink="/user/login/">Login</a>
+        </li>
+    </ul>
+</nav>

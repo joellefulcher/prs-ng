@@ -1,0 +1,27 @@
+<app-menu></app-menu> 
+<span class="page-title font-weight-bold font-italic">{{title}}</span>
+<span><a routerLink="/product/create" *ngIf="isAdmin">
+    <img width="20" height="20" src="assets/add-icon.png" title="add new"></a>
+</span>
+<table class="table table-sm table-striped">
+    <thead>
+        <tr>
+            <th>Part Number</th>
+            <th>Product Name</th>
+            <th>Price</th>
+            <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let product of products">
+                <td>{{product.partNumber}}</td>
+                <td>{{product.name}}</td>
+                <td>{{product.price | currency}}</td>
+            <td>    
+           <a routerLink='/product/detail/{{product.id}}'><img src='assets/details.png' width='20' height='20' title="Detail"></a>
+        
+           <a routerLink='/product/edit/{{product.id}}' *ngIf="isAdmin"><img src='assets/pencil-icon.png' width='20' height='20' title="Edit"></a>
+           </td>
+        </tr>
+   </tbody>
+</table>
